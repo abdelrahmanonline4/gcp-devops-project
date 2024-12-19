@@ -53,8 +53,8 @@ options:
 ```
 ### Step 3: Kubernetes Deployment
 - Use gke.yaml to deploy the Docker image to GKE:
-  ```gke.yaml
-  apiVersion: apps/v1
+```
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gcp-devops-gke
@@ -73,6 +73,7 @@ spec:
         image: gcr.io/$PROJECT_ID/gcpdevops:latest
         ports:
         - containerPort: 5000
+
 ---
 apiVersion: v1
 kind: Service
@@ -84,9 +85,10 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 5000
+  selector:
+    app: gcp
   type: LoadBalancer
-
-    ```
+```
 ## Step 4: Access the Application
 
 - After deployment, access the application through the external IP provided by the LoadBalancer.
